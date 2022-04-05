@@ -14,13 +14,18 @@ export const User = styled.a`
   align-items: center;
   justify-content: space-between;
   padding: 0 0 0 0.4rem;
-  margin: 0.5rem 0;
   background: #fff;
   text-decoration: none;
   color: #777;
   font-size: 0.9rem;
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
-    rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+  &:first-child {
+    border-top: 1px solid #ddd;
+    margin: 0.2rem 0 0 0;
+  }
+  border-bottom: 1px solid #ddd;
+  &:hover {
+    background: rgba(220, 220, 220, 0.3);
+  }
 `;
 
 export const Image = styled.img`

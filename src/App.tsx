@@ -17,27 +17,32 @@ function App() {
   useEffect(() => {
     if (!input.trim()) return;
 
-    axios
-      .get(BASE_URL + input)
-      .then((res: AxiosResponse) => {
-        const options: UserConfig[] = res.data.items
-          .map((item: any) => {
-            return {
-              username: item.login,
-              url: item.html_url,
-              avatar: item.avatar_url,
-            };
-          })
-          .filter((el: UserConfig) =>
-            el.username.toLowerCase().includes(input.toLowerCase())
-          );
+    // small timeout for request limit
+    const timeout = setTimeout(() => {
+      axios
+        .get(BASE_URL + input)
+        .then((res: AxiosResponse) => {
+          const options: UserConfig[] = res.data.items
+            .map((item: any) => {
+              return {
+                username: item.login,
+                url: item.html_url,
+                avatar: item.avatar_url,
+              };
+            })
+            .filter((el: UserConfig) =>
+              el.username.toLowerCase().includes(input.toLowerCase())
+            );
 
-        setUsers(options);
-      })
-      .catch((err) => {
-        console.log(err);
-        setWarn(true);
-      });
+          setUsers(options);
+        })
+        .catch((err) => {
+          console.log(err);
+          setWarn(true);
+        });
+    }, 1000);
+
+    return () => clearTimeout(timeout);
   }, [input]);
 
   return (

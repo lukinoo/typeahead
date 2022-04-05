@@ -7,8 +7,12 @@ interface Props {
 }
 
 const Form: React.FC<Props> = ({ input, setInput }) => {
+  const formHandler = (e: React.FormEvent<HTMLFormElement>): void => {
+    e.preventDefault();
+  };
+
   return (
-    <StyledForm>
+    <StyledForm onSubmit={formHandler}>
       <span>
         <svg
           xmlns="http://www.w3.org/2000/svg"
